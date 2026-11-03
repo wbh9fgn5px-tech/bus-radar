@@ -1,0 +1,34 @@
+# Bus Radar France — FRONTEND sur Netlify (pages statiques : accueil + carte).
+# L'API et le moteur d'ingestion tournent sur un serveur permanent (voir render.yaml).
+#
+# À définir dans Netlify › Site configuration › Environment variables :
+#   NEXT_PUBLIC_API_BASE = https://<votre-backend>   (sans / final)
+
+[build]
+  command = "npm run build:static"
+  publish = "out"
+
+[build.environment]
+  NODE_VERSION = "24"
+  NEXT_OUTPUT = "export"
+  NEXT_TELEMETRY_DISABLED = "1"
+  # Site 100 % statique : pas d'adaptateur serveur Next.js.
+  NETLIFY_NEXT_PLUGIN_SKIP = "true"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "geolocation=(self), camera=(), microphone=()"
+
+[[headers]]
+  for = "/_next/static/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/maplibre-gl-worker.mjs"
+  [headers.values]
+    Content-Type = "text/javascript; charset=utf-8"
+    Cache-Control = "public, max-age=86400"

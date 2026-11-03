@@ -1,0 +1,4 @@
+{
+  "$comment": "Rattachements manuels source → groupe exploitant. Chaque entrée DOIT citer une preuve publique (page AOM, communiqué, délibération). Aucune entrée n'est livrée par défaut : les contrats d'exploitation évoluent et ne figurent pas dans les flux open data.",
+  "overrides": []
+}

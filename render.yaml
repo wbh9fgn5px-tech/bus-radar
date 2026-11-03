@@ -1,0 +1,21 @@
+# Bus Radar France — BACKEND (API + moteur d'ingestion) sur Render.
+# Render › New › Blueprint › ce dépôt. Le service doit rester actif en
+# permanence : une offre payante est nécessaire (l'offre gratuite se met en
+# veille et arrête l'ingestion).
+services:
+  - type: web
+    name: bus-radar-api
+    runtime: docker
+    plan: standard            # 2 Go de RAM ; "starter" (512 Mo) est trop juste
+    region: frankfurt
+    healthCheckPath: /api/health
+    numInstances: 1           # état en mémoire : une seule instance
+    envVars:
+      - key: CORS_ORIGIN
+        value: "*"            # ou l'URL exacte du site Netlify
+      - key: DATA_DIR
+        value: /data
+    disk:
+      name: bus-radar-data
+      mountPath: /data
+      sizeGB: 2

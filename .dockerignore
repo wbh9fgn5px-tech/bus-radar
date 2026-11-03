@@ -1,0 +1,9 @@
+node_modules
+.next
+out
+.data
+.git
+.env*
+!.env.example
+docs/audit/*.json
+public/maplibre-gl-worker.mjs
